@@ -43,7 +43,8 @@ mix.styles([
     'resources/plugins/pdfmake/pdfmake.min.js',
     'resources/plugins/datatables-buttons/js/buttons.print.min.js',
     'resources/plugins/toastr/toastr.min.js',
-    'resources/plugins/sweetalert2/sweetalert2.min.js'
+    'resources/plugins/sweetalert2/sweetalert2.min.js',
+    'resources/plugins/dropzone/min/dropzone.min.js'
 ], 'public/js/all.js').copy(
     'resources/plugins/fontawesome-free/webfonts',
     'public/webfonts'

@@ -16,15 +16,15 @@ class CreateFacturesTable extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('client')->default(null);
-            $table->string('idClient')->default(null);
-            $table->string('dateFacturation')->default(null);
-            $table->string('numeroFacture')->default(null);
-            $table->string('dateEcheance')->default(null);
-            $table->string('numeroCommande')->default(null);
-            $table->text('articles')->default(null);
-            $table->string('prixHT')->default(null);
-            $table->string('prixTTC')->default(null);
+            $table->string('client')->nullable();
+            $table->integer('idClient')->nullable();
+            $table->date('dateFacturation')->nullable();
+            $table->string('numeroFacture')->nullable();
+            $table->date('dateEcheance')->nullable();
+            $table->integer('numeroCommande')->nullable();
+            $table->text('articles')->nullable();
+            $table->integer('prixHT')->nullable();
+            $table->integer('prixTTC')->nullable();
             $table->string('envoye')->default('non');
         });
     }

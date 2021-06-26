@@ -130,10 +130,10 @@
       })
       //Date picker
       $('#reservationdate1').datetimepicker({
-        format: 'L'
+        format: 'YYYY-MM-DD'
       });
       $('#reservationdate2').datetimepicker({
-        format: 'L'
+        format: 'YYYY-MM-DD'
       });
     });
   </script>

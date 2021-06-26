@@ -63,25 +63,11 @@
                                             <i class="fa fa-credit-card bg-purple"></i>
                                             <div class="timeline-item">
                                                 <h3 class="timeline-header">Être payé</h3>
-                                                @if($paye!='oui')
-                                                <div class="timeline-body">
-                                                    Statut : Payé
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <button disabled type="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#modal-default">
-                                                        Ajouter un paiement
-                                                    </button>
-                                                </div>
-                                                @else
-                                                <div class="timeline-body">
-                                                    Statut : En attente du paiement
-                                                </div>
                                                 <div class="timeline-footer">
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
                                                         Ajouter un paiement
                                                     </button>
                                                 </div>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -257,8 +243,9 @@
                                 <div class="form-group">
                                     <label for="mede">Mode de paiement</label>
                                     <select name='mode' class="form-control select2" id="mode" style="width: 100%;">
-                                        <option value="bank">Transfert bancaire</option>
-                                        <option value="cash">Cash</option>
+                                        @foreach($reglements as $reglement)
+                                        <option value="{{$reglement->libelle}}">{{$reglement->libelle}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -334,7 +321,8 @@
         formData.append('idClient', '{{$facture[0] -> idClient}}')
         formData.append('idFacture', '{{$facture[0] -> id}}')
         formData.append('date', form.date.value)
-        formData.append('montant', form.montant.value)
+        formData.append('montant', parseInt('{{$facture[0] -> prixTTC}}'))
+        formData.append('credit', form.montant.value)
         formData.append('compte', form.compte.value)
         formData.append('devise', form.devise.value)
         formData.append('description', form.description.value)

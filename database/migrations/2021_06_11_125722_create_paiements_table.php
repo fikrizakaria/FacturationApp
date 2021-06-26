@@ -16,15 +16,17 @@ class CreatePaiementsTable extends Migration
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('idClient');
-            $table->string('idFacture');
-            $table->string('date')->nullable();
-            $table->string('montant')->nullable();
+            $table->integer('idClient');
+            $table->integer('idFacture');
+            $table->date('date')->nullable();
+            $table->integer('montant')->default(0);
+            $table->integer('credit')->default(0);
             $table->string('compte')->nullable();
             $table->string('devise')->nullable();
             $table->text('description')->nullable();
             $table->string('mode')->nullable();
             $table->string('reference')->nullable();
+            $table->boolean('importe')->default(0);
         });
     }
 

@@ -7,6 +7,7 @@ use App\Mail\envoiFacture;
 use App\Models\Facture;
 use App\Models\Paiement;
 use App\Models\Prestation;
+use App\Models\Reglement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,8 +24,8 @@ class FactureController extends Controller
         Facture::create([
             'idClient' => $request->idClient,
             'client' => $request->client,
-            'dateFacturation' => $request->dateFacturation,
-            'dateEcheance' => $request->dateEcheance,
+            'dateFacturation' => date("Y-m-d", strtotime($request->dateFacturation)),
+            'dateEcheance' => date("Y-m-d", strtotime($request->dateEcheance)),
             'numeroFacture' => $request->numeroFacture,
             'numeroCommande' => $request->numeroCommande,
             'articles' => $request->articles,
@@ -47,16 +48,17 @@ class FactureController extends Controller
         $envoye='non';
         foreach ($facture as $fac) {
             $fac->articles=json_decode($fac->articles);
-            $fac->prixHT=explode(" DH", $fac->prixHT)[0];
-            $fac->prixTTC = explode(" DH", $fac->prixTTC)[0];
+            $fac->prixHT=$fac->prixHT;
+            $fac->prixTTC =$fac->prixTTC;
             $envoye=$fac->envoye;
         }
         $paye=Paiement::where('idFacture', $id)->get();
+        $reglements=Reglement::get();
         if($paye){
-            return view('facturation.factureDetail', ['facture' => $facture, 'paye'=>'oui', 'envoye'=>$envoye]);
+            return view('facturation.factureDetail', ['facture' => $facture, 'paye'=>'oui', 'reglements' => $reglements, 'envoye'=>$envoye]);
         }
         else {
-            return view('facturation.factureDetail', ['facture' => $facture, 'paye' => 'non']);
+            return view('facturation.factureDetail', ['facture' => $facture, 'paye' => 'non','reglements'=>$reglements]);
         }
         
     }
@@ -78,5 +80,9 @@ class FactureController extends Controller
     {
         Facture::find($id)->delete();
         return redirect('/facturation/factures');
+    }
+    public function index1(){
+        $clients = Client::select('id', 'nom')->get();
+        return view('facturation.compte', ['clients' => $clients]);
     }
 }

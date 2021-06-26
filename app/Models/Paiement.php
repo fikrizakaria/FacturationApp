@@ -12,5 +12,5 @@ class Paiement extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'idClient', 'idFacture', 'date', 'montant', 'description', 'type', 'devise', 'reference', 'compte'];
+    protected $fillable = ['id', 'idClient', 'idFacture', 'date', 'montant', 'credit', 'description', 'type', 'devise', 'reference', 'compte', 'importe'];
 }

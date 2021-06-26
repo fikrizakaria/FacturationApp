@@ -127,7 +127,7 @@
 
                                 </div>
                             </div>
-                                <!-- /.card-body -->
+                            <!-- /.card-body -->
                         </form>
                         <div class="card-footer">
                             <div class="row">
@@ -234,11 +234,11 @@
         formData.append('dateEcheance', form.dateEcheance.value)
         formData.append('numeroCommande', form.numeroCommande.value)
         var articles = $('#example1').DataTable().columns([1, 2]).rows().data().toArray().map(function(val) {
-            return [val[0], val[2], val[3], val[4]]
+            return [val[0], val[1], val[2], val[3]]
         });
         formData.append('articles', JSON.stringify(articles))
-        formData.append('prixHT', htt.innerHTML)
-        formData.append('prixTTC', tott.innerHTML)
+        formData.append('prixHT', htt.innerHTML.split(" DH")[0])
+        formData.append('prixTTC', tott.innerHTML.split(" DH")[0])
         fetch("/facturation/creer", {
                 method: 'POST',
                 body: formData

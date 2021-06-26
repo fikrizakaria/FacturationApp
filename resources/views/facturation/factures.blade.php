@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>{{$facture->numeroFacture}}</td>
                                         <td>{{$facture->client}}</td>
-                                        <td>{{$facture->prixTTC}}</td>
+                                        <td>{{$facture->prixTTC}} DH</td>
                                         <td>{{$facture->dateFacturation}}</td>
                                         <td>{{$facture->dateEcheance}}</td>
                                         <td>
